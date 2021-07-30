@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.pizzapalace.databinding.FragmentOrderBinding
 
 
@@ -21,6 +19,8 @@ import com.example.pizzapalace.databinding.FragmentOrderBinding
 class OrderFragment : Fragment() {
 
     var check : Int = 0
+    var subOrders : Int = 0
+    lateinit var cart : MutableList<Order>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -32,7 +32,17 @@ class OrderFragment : Fragment() {
         val spnToppings = binding.spnToppings
         val spnCrusts = binding.spnCrusts
         val selectedToppings : MutableList<String> = mutableListOf()
-        var txtToppings : String = ""
+        var txtToppings = ""
+
+        val rdgSize = binding.rdgSize
+        val rdbId: Int = rdgSize.checkedRadioButtonId
+        val rdbSelected: RadioButton = rdgSize.findViewById(rdbId)
+        val selectedSize: String = rdbSelected.text.toString()
+
+        val swtExtraSauce = binding.swtExtraSauce
+        val swtExtraCheese = binding.swtExtraCheese
+        val spnCrust = binding.spnCrusts.selectedItem
+        val nbpQty = binding.nbpQuantity.value
 
         populateSpinner(spnToppings, toppings)
         populateSpinner(spnCrusts, crusts)
@@ -44,7 +54,7 @@ class OrderFragment : Fragment() {
 
                         if(selectedToppings.contains(toppings[position])) {
                             context?.let {Toast.makeText(it.applicationContext,
-                                toppings[position] + " was already added to your pizza", Toast.LENGTH_SHORT).show()}
+                                toppings[position] + " already added to your pizza", Toast.LENGTH_SHORT).show()}
                         } else {
                             selectedToppings.add(toppings[position])
 
@@ -69,6 +79,34 @@ class OrderFragment : Fragment() {
                     // write code to perform some action
                 }
             }
+
+        fun clearForm() {
+            binding.rdbMedium.isChecked = true
+            binding.swtExtraSauce.isChecked = false
+            binding.swtExtraCheese.isChecked = false
+            binding.textView3.setText("")
+            txtToppings = ""
+            selectedToppings.clear()
+            binding.nbpQuantity.value = 2
+        }
+
+        binding.btnAdd.setOnClickListener { view : View ->
+
+            val order = Order(selectedSize, swtExtraSauce.isChecked, swtExtraCheese.isChecked,
+                              selectedToppings, spnCrusts.toString(), nbpQty)
+
+            cart.add(order)
+
+            context?.let {Toast.makeText(it.applicationContext,
+                "Order Added to Cart", Toast.LENGTH_SHORT).show()}
+
+            subOrders += 1
+            clearForm()
+        }
+
+        binding.btnReview.setOnClickListener { view : View ->
+            view.findNavController().navigate(R.id.action_orderFragment_to_cartFragment)
+        }
 
         return binding.root
     }
