@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PizzaPalace</string>
+    <string name="app_name">Pizza Palace 🍕</string>
     <string name="get_started">Get Started</string>
     <string name="crust">Crust</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -16,4 +16,22 @@
     <string name="extra_large">Extra Large</string>
     <string name="extras">Extras</string>
     <string name="size">Size</string>
+    <string name="review_order">Review Order</string>
+    <string-array name="Toppings">
+        <item>Pepperoni</item>
+        <item>Mushrooms</item>
+        <item>Onions</item>
+        <item>Sausage</item>
+        <item>Bacon</item>
+        <item>Black Olives</item>
+        <item>Green Peppers</item>
+        <item>Pineapple</item>
+        <item>Ground Beef</item>
+    </string-array>
+    <string-array name="Crusts">
+        <item>Original</item>
+        <item>Gluten Free</item>
+        <item>Thin</item>
+        <item>Stuffed</item>
+    </string-array>
 </resources>

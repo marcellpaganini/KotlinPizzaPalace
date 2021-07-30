@@ -42,28 +42,29 @@
             app:layout_constraintTop_toBottomOf="@+id/textView">
 
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/rdb_small"
                 android:layout_width="match_parent"
                 android:textSize="12sp"
                 android:layout_height="40dp"
                 android:text="@string/small" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/rdb_medium"
                 android:layout_width="match_parent"
                 android:textSize="12sp"
                 android:layout_height="40dp"
+                android:checked="true"
                 android:text="@string/medium" />
 
             <RadioButton
-                android:id="@+id/radioButton3"
+                android:id="@+id/rdb_large"
                 android:layout_width="match_parent"
                 android:textSize="12sp"
                 android:layout_height="40dp"
                 android:text="@string/large" />
 
             <RadioButton
-                android:id="@+id/radioButton4"
+                android:id="@+id/rdb_extra_large"
                 android:layout_width="match_parent"
                 android:textSize="12sp"
                 android:layout_height="40dp"
@@ -76,11 +77,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
             android:text="@string/extras"
-            app:layout_constraintStart_toStartOf="@+id/switch2"
+            app:layout_constraintStart_toStartOf="@+id/swt_extra_sauce"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-        <Switch
-            android:id="@+id/switch1"
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/swt_extra_sauce"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -88,14 +89,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-        <Switch
-            android:id="@+id/switch2"
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/swt_extra_cheese"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="@string/extra_cheese"
-            app:layout_constraintEnd_toEndOf="@+id/switch1"
-            app:layout_constraintTop_toBottomOf="@+id/switch1" />
+            app:layout_constraintEnd_toEndOf="@+id/swt_extra_sauce"
+            app:layout_constraintTop_toBottomOf="@+id/swt_extra_sauce" />
 
         <TextView
             android:id="@+id/textView5"
@@ -108,7 +108,7 @@
             app:layout_constraintTop_toBottomOf="@+id/rdg_size" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/spn_toppings"
             android:layout_width="184dp"
             android:layout_height="55dp"
             android:layout_marginStart="8dp"
@@ -120,14 +120,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Crust"
+            android:text="@string/crust"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.37"
             app:layout_constraintStart_toEndOf="@+id/textView5"
             app:layout_constraintTop_toBottomOf="@+id/rdg_size" />
 
         <Spinner
-            android:id="@+id/spinner2"
+            android:id="@+id/spn_crusts"
             android:layout_width="184dp"
             android:layout_height="55dp"
             android:layout_marginEnd="8dp"
@@ -142,10 +142,10 @@
             android:layout_marginEnd="60dp"
             android:text="@string/quantity"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+            app:layout_constraintTop_toBottomOf="@+id/spn_crusts" />
 
         <com.shawnlin.numberpicker.NumberPicker
-            android:id="@+id/number_picker"
+            android:id="@+id/nbp_quantity"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
             android:layout_centerInParent="true"
@@ -160,13 +160,25 @@
             app:np_height="180dp"
             app:np_itemSpacing="-10dp"
             app:np_max="59"
-            app:np_min="0"
+            app:np_min="1"
             app:np_selectedTextColor="#2196F3"
             app:np_selectedTextSize="20dp"
             app:np_textColor="#CB6A6A6A"
             app:np_textSize="20dp"
-            app:np_value="3"
+            app:np_value="2"
             app:np_width="64dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="183dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="100dp"
+            android:text=""
+            app:layout_constraintEnd_toStartOf="@+id/nbp_quantity"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spn_toppings" />
 
         <TextView
             android:id="@+id/textView4"
@@ -179,7 +191,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_add"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:text="@string/cart"
@@ -190,32 +202,20 @@
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_review"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="32dp"
-            android:text="Review Order"
+            android:text="@string/review_order"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button"
+            app:layout_constraintTop_toBottomOf="@+id/btn_add"
             app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="183dp"
-            android:layout_height="120dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="100dp"
-            android:text=""
-            app:layout_constraintEnd_toStartOf="@+id/number_picker"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
