@@ -20,7 +20,7 @@ class OrderFragment : Fragment() {
 
     var check : Int = 0
     var subOrders : Int = 0
-    lateinit var cart : MutableList<Order>
+    var cart = mutableListOf<Order>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -91,17 +91,21 @@ class OrderFragment : Fragment() {
         }
 
         binding.btnAdd.setOnClickListener { view : View ->
+            try {
+                val order = Order(selectedSize, swtExtraSauce.isChecked, swtExtraCheese.isChecked,
+                    selectedToppings, spnCrust.toString(), nbpQty)
 
-            val order = Order(selectedSize, swtExtraSauce.isChecked, swtExtraCheese.isChecked,
-                              selectedToppings, spnCrusts.toString(), nbpQty)
+                cart.add(order)
 
-            cart.add(order)
+                context?.let {Toast.makeText(it.applicationContext,
+                    "Order Added to Cart", Toast.LENGTH_SHORT).show()}
 
-            context?.let {Toast.makeText(it.applicationContext,
-                "Order Added to Cart", Toast.LENGTH_SHORT).show()}
-
-            subOrders += 1
-            clearForm()
+                subOrders += 1
+                clearForm()
+            }catch (e: Exception){
+                context?.let {Toast.makeText(it.applicationContext,
+                    e.message, Toast.LENGTH_SHORT).show()}
+            }
         }
 
         binding.btnReview.setOnClickListener { view : View ->
